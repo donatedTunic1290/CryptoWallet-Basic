@@ -3,7 +3,7 @@ var router = express.Router();
 var path = require('path');
 var Web3 = require('web3');
 var web3 = new Web3("https://ropsten.infura.io/v3/5af13ab72a694c969925427f54a7598b");
-// var web3 = new Web3("ws://localhost:8545");
+// var web3 = new Web3("http://localhost:30303");
 
 const sampleContract = require('fs').readFileSync(path.resolve('./contracts/Bank.sol'));
 const contractABI = require('../contracts/ABI');

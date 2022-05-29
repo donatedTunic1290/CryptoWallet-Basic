@@ -1,26 +1,43 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.1;
+import './BankLib.sol';
 
-contract Bank {
+contract Bank is bankLibrary {
 
-    mapping(address => uint256) private balanceOf;   // balances, indexed by addresses
-
-    function deposit(uint256 amount) external payable {
-        require(msg.value == amount);
-        balanceOf[msg.sender] += amount;     // adjust the account's balance
+    constructor() {
+        //
     }
 
-    function withdraw(uint256 amount) external {
-        require(amount <= balanceOf[msg.sender]);
+    mapping(address => uint256) public balanceOf;   // balances, indexed by addresses
+    event deposit(uint256 amount, address who);
+    address[] storage myaddress;
+
+    function deposit(uint256 amount) external override payable {
+        require(msg.value == amount, "You have not send enough ethers for this deposit");
+        balanceOf[msg.sender] += amount;     // adjust the account's balance
+        emit deposit(amount, msg.sender);
+    }
+
+    function withdraw(uint256 amount) external override {
+        require(amount <= balanceOf[msg.sender], "Not enough balance");
         balanceOf[msg.sender] -= amount;
         payable(msg.sender).transfer(amount);
     }
 
-    function getBalance() external view returns(uint256) {
-        return balanceOf[msg.sender];
+    fallback() public payable {
+        // data transaction
     }
+
+    receive() {
+        // value transaction
+    }
+
 }
 
+interface bankInterface {
+    function deposit(uint256 amount) external payable;
+    function withdraw(uint256 amount) external;
+}
 
 {
 "generatedSources": [],

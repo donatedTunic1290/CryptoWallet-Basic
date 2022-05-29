@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
@@ -7,7 +6,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import {Card} from "@material-ui/core";
 import {Box} from '@material-ui/core';
 
 function App() {
